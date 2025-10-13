@@ -64,6 +64,7 @@ Currently tested on:
 - Kindle Paperwhite (12th Gen)
 - Kindle Basic(11th Gen)
 - Kindle Basic(10th Gen)
+- Kobo Libra Color
 
 It should work on other Kindle devices and may also work on Kobo devices (untested).  
 If you own a Kobo and would like to help test, please open an Issue on GitHub.
