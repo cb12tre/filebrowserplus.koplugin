@@ -142,7 +142,9 @@ function FilebrowserPlus:start()
             logger.info("[FilebrowserPlus] Failed to create data path:", self.filebrowserplus_dataPath)
             UIManager:show(InfoMessage:new{
                 icon = "notice-warning",
-                text = _("Failed to create data directory. Check path or permissions.")
+                text = _("Failed to create data directory.\n" .. "Please check the path or permissions.\n\n" ..
+                             "Note: On Kindle, only locations under /mnt/us are writable.\n" ..
+                             "On Kobo, only locations under /mnt/onboard are writable.")
             })
             return
         end
