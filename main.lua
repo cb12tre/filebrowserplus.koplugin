@@ -113,12 +113,7 @@ function FilebrowserPlus:resetPassword()
 end
 
 function FilebrowserPlus:start()
-    if self:isRunning() then
-        logger.dbg("[FilerowserX] Not starting FilebrowserPlus, already running.")
-        return
-    end
 
-    -- Make a hole in the Kindle's firewall
     if Device:isKindle() then
         os.execute(string.format("%s %s %s", "iptables -A INPUT -p tcp --dport", self.filebrowserplus_port,
             "-m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT"))
@@ -126,6 +121,11 @@ function FilebrowserPlus:start()
             "-m conntrack --ctstate ESTABLISHED -j ACCEPT"))
     end
 
+    if self:isRunning() then
+        logger.dbg("[FilebrowserPlus] Not starting FilebrowserPlus, already running.")
+        return
+    end
+    
     if not util.fileExists(db_path) then
         self.filebrowserplus_first_setup = true
         self:config()
@@ -209,8 +209,7 @@ end
 
 function FilebrowserPlus:isRunning()
     if not util.pathExists(pid_path) then
-        local check = os.execute(string.format("pgrep -f '%s' >/dev/null 2>&1", bin_path))
-        return check == 0
+        return false
     end
 
     local f = io.open(pid_path, "r")
@@ -249,6 +248,13 @@ function FilebrowserPlus:stop()
             text = _("FilebrowserPlus server stopped."),
             timeout = 2
         })
+
+        if Device:isKindle() then
+        os.execute(string.format("%s %s %s", "iptables -D INPUT -p tcp --dport", self.filebrowserplus_port,
+            "-m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT"))
+        os.execute(string.format("%s %s %s", "iptables -D OUTPUT -p tcp --sport", self.filebrowserplus_port,
+            "-m conntrack --ctstate ESTABLISHED -j ACCEPT"))
+    end
     else
         logger.info("[FilebrowserPlus] Failed to stop Filebrowser, status:", status)
         UIManager:show(InfoMessage:new{
@@ -257,12 +263,7 @@ function FilebrowserPlus:stop()
         })
     end
 
-    if Device:isKindle() then
-        os.execute(string.format("%s %s %s", "iptables -D INPUT -p tcp --dport", self.filebrowserplus_port,
-            "-m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT"))
-        os.execute(string.format("%s %s %s", "iptables -D OUTPUT -p tcp --sport", self.filebrowserplus_port,
-            "-m conntrack --ctstate ESTABLISHED -j ACCEPT"))
-    end
+    
 end
 
 function FilebrowserPlus:onToggleFilebrowserPlusServer()
