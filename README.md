@@ -80,9 +80,10 @@ Currently tested on:
 - Kindle Basic(10th Gen)
 - Kobo Libra Color
 - Pocketbook Inkpad Color 3
+- Kobo Clara BW
 
-It should work on other Kindle devices and may also work on Kobo devices (untested).  
-If you own a Kobo and would like to help test, please open an Issue on GitHub.
+It should work on other Kindle devices and Kobo devices.  
+If you own any other device and would like to help test, please open an Issue on GitHub.
 
 ## Limitations
 
