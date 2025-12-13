@@ -1,5 +1,8 @@
 # FilebrowserPlus Plugin for KOReader
 
+>[!IMPORTANT]
+>Contributors needed for testing. Please check discussion #16.
+
 ## What is this?
 
 This is a plugin for [KOReader](https://github.com/koreader/koreader) that allows you to run [Filebrowser](https://github.com/filebrowser/filebrowser) directly from within KOReader on any supported device.  
