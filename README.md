@@ -1,7 +1,7 @@
 # FilebrowserPlus Plugin for KOReader
 
 >[!IMPORTANT]
->Contributors needed for testing. Please check discussion #16.
+>Contributors needed for testing. Please check [Discussion #16](https://github.com/patelneeraj/filebrowserplus.koplugin/discussions/16)
 
 ## What is this?
 
